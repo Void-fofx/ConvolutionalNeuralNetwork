@@ -26,26 +26,6 @@ test_loader = DataLoader(test_data, batch_size=10, shuffle=False)
 conv1 = nn.Conv2d(1, 6, 3, 1)
 conv2 = nn.Conv2d(6, 16, 3, 1)
 
-# grab one MNIST image
-for i, (X_Train, y_train) in enumerate(train_data):
-  break
-
-X_Train.shape
-
-x = X_Train.view(1,1,28,28)
-
-# run through first convolution
-x = F.relu(conv1(x))
-
-# run through first pooling layer
-x = F.max_pool2d(x,2,2) # kernal of 2 and stride of 2
-
-x.shape
-
-x = F.relu(conv2(x))
-
-x = F.max_pool2d(x,2,2)
-
 class ConvolutionalNetwork(nn.Module):
   def __init__(self):
     super().__init__()
@@ -80,7 +60,6 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001) # low learning rate = longer training time
 
 start_time = time.time()
-
 
 # create tracking variables
 epochs = 5
